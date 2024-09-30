@@ -37,10 +37,10 @@ export default function Home() {
             {" "}
             {/* Container da imagem */}
             <Image
-              src={data?.imgaeUrl || "/core.png"} // Imagem de fundo
+              src={data?.imgaeUrl || ""} // Imagem de fundo
               alt="imagem de bom dia"
               fill={true} // Faz a imagem ocupar o container
-              className="rounded-lg object-cover" // Classe para moldar a imagem ao container
+              className="rounded-lg object-cover opacity-70" // Classe para moldar a imagem ao container
             />
             <h1 className="absolute items-center justify-center gap-5 bg-opacity-10 p-3 font-serif text-5xl font-extrabold drop-shadow-xl sm:text-[5rem]">
               {data?.fraseMotivacional}
