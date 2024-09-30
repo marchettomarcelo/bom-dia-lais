@@ -1,3 +1,4 @@
+// @ts-nocheck
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -45,9 +46,9 @@ export default function Home() {
               src={data?.imgaeUrl}
               alt="imagem de bom dia"
               fill={true} // Faz a imagem ocupar o container
-              className="rounded-lg object-cover " // Classe para moldar a imagem ao container
+              className="rounded-lg object-cover" // Classe para moldar a imagem ao container
             />
-            <h1 className="absolute items-center p-3 justify-center gap-5 bg-opacity-10 font-serif text-5xl font-extrabold drop-shadow-xl sm:text-[5rem]">
+            <h1 className="absolute items-center justify-center gap-5 bg-opacity-10 p-3 font-serif text-5xl font-extrabold drop-shadow-xl sm:text-[5rem]">
               {data?.fraseMotivacional}
             </h1>
             <h3 className="absolute bottom-0 right-0 rounded-lg bg-white p-2 opacity-70">

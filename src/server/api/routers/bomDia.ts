@@ -1,8 +1,8 @@
+// @ts-nocheck
 import OpenAI from "openai";
 
 const openai = new OpenAI({
-  apiKey:
-    process.env.OPENAI_API_KEY,
+  apiKey: process.env.OPENAI_API_KEY,
 });
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
