@@ -1,4 +1,3 @@
-// @ts-nocheck
 import OpenAI from "openai";
 
 const openai = new OpenAI({
@@ -26,6 +25,10 @@ export const bomDiaRouter = createTRPCRouter({
       size: "1024x1024",
     });
 
+    if (!imagemDeFundo.data[0]) {
+      throw new Error("Failed to generate image");
+    }
+
     const image_url = imagemDeFundo.data[0].url;
 
     if (!image_url) {
@@ -52,8 +55,8 @@ export const bomDiaRouter = createTRPCRouter({
 
     const data = await ctx.db.bomDia.create({
       data: {
-        imgaeUrl: uploadedFile.data?.url,
-        fraseMotivacional: fraseMotivacional.choices[0].message.content,
+        imgaeUrl: uploadedFile.data?.url || "",
+        fraseMotivacional: fraseMotivacional.choices[0].message.content || "",
         createdAt: new Date(),
       },
     });

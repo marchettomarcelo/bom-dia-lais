@@ -1,11 +1,7 @@
-// @ts-nocheck
 import Head from "next/head";
 import Image from "next/image";
-import Link from "next/link";
 
 import { api } from "~/utils/api";
-
-import { UploadButton } from "~/utils/uploadthing";
 
 function getRandomColor() {
   var letters = "0123456789ABCDEF";
@@ -18,8 +14,6 @@ function getRandomColor() {
 
 export default function Home() {
   const { data } = api.bomDia.getLatestBomDia.useQuery();
-
-  const { mutate } = api.bomDia.createBomDia.useMutation();
 
   return (
     <>
@@ -43,7 +37,7 @@ export default function Home() {
             {" "}
             {/* Container da imagem */}
             <Image
-              src={data?.imgaeUrl}
+              src={data?.imgaeUrl || "/core.png"} // Imagem de fundo
               alt="imagem de bom dia"
               fill={true} // Faz a imagem ocupar o container
               className="rounded-lg object-cover" // Classe para moldar a imagem ao container
