@@ -14,27 +14,34 @@ export const bomDiaRouter = createTRPCRouter({
     });
   }),
   createBomDia: publicProcedure.mutation(async ({ ctx }) => {
-    console.log(
-      "----------------------------------------------------------------",
-    );
-    console.log("inside createBomDia");
+    console.log("----------------------------------------------------------------");
+    console.log("Inside createBomDia");
+    console.log("----------------------------------------------------------------");
+    console.log("Initializing image generation");
+    console.log("----------------------------------------------------------------");
     const imagemDeFundo = await openai.images.generate({
       model: "dall-e-3",
       prompt: "A beautiful landscape",
       n: 1,
       size: "1024x1024",
     });
-
+    
+    console.log("Image generation complete");
+    console.log("----------------------------------------------------------------");
+    
     if (!imagemDeFundo.data[0]) {
       throw new Error("Failed to generate image");
     }
-
+    
     const image_url = imagemDeFundo.data[0].url;
-
+    
     if (!image_url) {
       throw new Error("Failed to generate image");
     }
-
+    
+    console.log("Initializing fraseMotivacional generation");
+    console.log("----------------------------------------------------------------");
+    
     const fraseMotivacional = await openai.chat.completions.create({
       messages: [
         {
@@ -44,15 +51,25 @@ export const bomDiaRouter = createTRPCRouter({
       ],
       model: "gpt-3.5-turbo",
     });
-
+    
+    console.log("FraseMotivacional generation complete");
+    console.log("----------------------------------------------------------------");
+    
     if (!fraseMotivacional.choices[0]) {
       throw new Error("Failed to generate fraseMotivacional");
     }
-
+    
+    console.log("Uploading image to UTAPI");
+    console.log("----------------------------------------------------------------");
+    
     const uploadedFile = await utapi.uploadFilesFromUrl(image_url);
-
-    console.log(uploadedFile);
-
+    
+    
+    console.log("Image uploaded to UTAPI");
+    console.log("----------------------------------------------------------------");
+    
+    console.log("Creating bomDia in database");
+    console.log("----------------------------------------------------------------");
     const data = await ctx.db.bomDia.create({
       data: {
         imgaeUrl: uploadedFile.data?.url || "",
@@ -60,7 +77,10 @@ export const bomDiaRouter = createTRPCRouter({
         createdAt: new Date(),
       },
     });
+    
+    console.log("BomDia created in database");
+    console.log("----------------------------------------------------------------");
 
-    return data;
+    // return data;
   }),
 });
