@@ -19,6 +19,9 @@ export const bomDiaRouter = createTRPCRouter({
     );
     console.log("Inside createBomDia");
 
+    console.log(
+      "----------------------------------------------------------------",
+    );
     console.log("Initializing fraseMotivacional generation");
     console.log(
       "----------------------------------------------------------------",
@@ -43,19 +46,26 @@ export const bomDiaRouter = createTRPCRouter({
       throw new Error("Failed to generate fraseMotivacional");
     }
 
-    console.log(
-      "----------------------------------------------------------------",
-    );
     console.log("Initializing image generation");
     console.log(
       "----------------------------------------------------------------",
     );
-    const imagemDeFundo = await openai.images.generate({
-      model: "dall-e-3",
-      prompt: "A beautiful landscape",
-      n: 1,
-      size: "1024x1024",
-    });
+    let imagemDeFundo;
+
+    console.log(process.env.OPENAI_KEY); // the same
+    console.log(openai.apiKey); // the same
+    try {
+      imagemDeFundo = await openai.images.generate({
+        model: "dall-e-3",
+        prompt: "A beautiful landscape",
+        n: 1,
+        size: "1024x1024",
+      });
+    } catch (error) {
+      console.log("Error generating image");
+      console.log(error);
+      return null;
+    }
 
     console.log("Image generation complete");
     console.log(
