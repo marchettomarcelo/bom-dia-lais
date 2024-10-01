@@ -42,7 +42,7 @@ export default function Home() {
               fill={true} // Faz a imagem ocupar o container
               className="rounded-lg object-cover opacity-70" // Classe para moldar a imagem ao container
             />
-            <h1 className="absolute items-center justify-center gap-5 bg-opacity-10 p-3 font-serif text-5xl font-extrabold drop-shadow-xl sm:text-[5rem]">
+            <h1 className="absolute items-center justify-center gap-5 bg-opacity-10 p-3 pr-0 font-serif text-5xl font-extrabold drop-shadow-xl lg:text-[4rem]">
               {data?.fraseMotivacional}
             </h1>
             <h3 className="absolute bottom-0 right-0 rounded-lg bg-white p-2 opacity-70">
